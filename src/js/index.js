@@ -59,7 +59,7 @@ function App() {
   // 키프레스 이벤트는 사용자가 키보드를 입력한 값을 추적해주는 이벤트이다
   // 따라서 이벤트 입력값 하나하나를 콘솔에 찍을 수 있음(엔터도 마찬가지!)
 
-  $("#espresso-menu-submit-button").addEventListener("click", (e) => {
+  $("#espresso-menu-submit-button").addEventListener("click", () => {
     addMenu();
   });
   $("#espresso-menu-name").addEventListener("keypress", (e) => {
@@ -67,6 +67,15 @@ function App() {
       return;
     }
     addMenu();
+  });
+
+  $("#espresso-menu-list").addEventListener("click", (e) => {
+    if (e.target.classList.contains("menu-edit-button")) {
+      const $menuName = e.target.closest("li").querySelector(".menu-name");
+      const menuName = $menuName.innerText;
+      const updatedMenuName = prompt("메뉴명을 수정하세요", menuName);
+      $menuName.innerText = updatedMenuName;
+    }
   });
 }
 
